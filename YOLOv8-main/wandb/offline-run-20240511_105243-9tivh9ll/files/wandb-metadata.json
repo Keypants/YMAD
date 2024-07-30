@@ -1,0 +1,53 @@
+{
+    "os": "Windows-10-10.0.22000-SP0",
+    "python": "3.8.19",
+    "heartbeatAt": "2024-05-11T02:52:43.804554",
+    "startedAt": "2024-05-11T02:52:43.661271",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "task=detect",
+        "mode=train",
+        "model=yolov8s.yaml",
+        "data=Gendar.yaml",
+        "epochs=100",
+        "batch=4"
+    ],
+    "state": "running",
+    "program": "-m __main__",
+    "codePathLocal": null,
+    "host": "LeGrex",
+    "username": "\u9ad8\u9038",
+    "executable": "D:\\anaconda\\envs\\yolov8\\python.exe",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 3201.0,
+        "min": 0.0,
+        "max": 3201.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3201.0,
+            "min": 0.0,
+            "max": 3201.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 494.86816024780273,
+            "used": 73.77277755737305
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 15.855525970458984
+    }
+}
