@@ -1,0 +1,9 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: F:\研究生\实验程序\ultralytics-main\datasets\Gendar # dataset root dir
+train: images/train  # train images (relative to 'path')
+val: images/val  # val images (relative to 'path')
+#test: F:/研究生/实验程序/数据集/已标注未集合/text # test images (optional)
+
+# Classes
+nc: 2  # number of classes
+names: ['0','1']  # class names
