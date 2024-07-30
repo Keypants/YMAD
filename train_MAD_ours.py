@@ -18,14 +18,14 @@ from ptflops import get_model_complexity_info
 # Set random seed for reproducibility
 torch.manual_seed(0)
 
-dataset_path = 'F:/研究生/实验程序/数据集/Classifier_training_dataset'
-unlabeled_male_path = os.path.join(dataset_path, 'male_crops1')
-unlabeled_female_path = os.path.join(dataset_path, 'female_crops1')
+dataset_path = './Classifier_training_dataset'
+unlabeled_male_path = os.path.join(dataset_path, 'male')
+unlabeled_female_path = os.path.join(dataset_path, 'female')
 
-# 图像大小
+# Image size
 image_size = (256, 256)
 
-# 数据预处理
+# Data preprocessing
 def preprocess_image(image_path, image_size):
     image = Image.open(image_path)
     image = image.resize(image_size)
@@ -39,27 +39,25 @@ def load_unlabeled_dataset():
     labels = []
     file_paths = []
 
-    # 加载未标注的male数据
     unlabeled_male_files = os.listdir(unlabeled_male_path)
     for file in unlabeled_male_files:
         if file.endswith('.jpg'):
             image_path = os.path.join(unlabeled_male_path, file)
             images.append(preprocess_image(image_path, image_size))
-            labels.append(1)  # 伪标签
+            labels.append(1)
             file_paths.append(image_path)
 
-    # 加载未标注的female数据
     unlabeled_female_files = os.listdir(unlabeled_female_path)
     for file in unlabeled_female_files:
         if file.endswith('.jpg'):
             image_path = os.path.join(unlabeled_female_path, file)
             images.append(preprocess_image(image_path, image_size))
-            labels.append(0)  # 伪标签
+            labels.append(0)
             file_paths.append(image_path)
 
     return images, labels, file_paths
 
-# 自定义数据集类
+# Custom data set classes
 class CustomDataset(Dataset):
     def __init__(self, images, labels, file_paths):
         self.images = images
@@ -75,18 +73,18 @@ class CustomDataset(Dataset):
         file_path = self.file_paths[idx]
         return image, label, file_path
 
-# 加载有标注的数据集
+# Load the annotated data set
 images, labels, file_paths = load_unlabeled_dataset()
 
-# 转换为张量
+# Convert to a tensor
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 images = torch.stack([torch.tensor(image).permute(2, 0, 1).to(device).float() for image in images])
 labels = torch.tensor(labels).to(device)
 
-# 创建数据集对象
+# Create data set objects
 dataset = CustomDataset(images, labels, file_paths)
 
-# 划分训练集、验证集和测试集
+# Divide the training set, the verification set, and the test set
 train_size = int(0.7 * len(dataset))
 val_size = int(0.2 * len(dataset))
 test_size = len(dataset) - train_size - val_size
